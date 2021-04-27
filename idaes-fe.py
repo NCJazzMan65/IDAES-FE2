@@ -10,6 +10,8 @@
 #                                                                     #
 #  Version:  1.0.0                                                    #
 #                                                                     #
+#  Revision Date:  4/12/2021                                          #
+#                                                                     #
 #######################################################################
 
 
@@ -37,15 +39,40 @@ class MainWindow(qtw.QMainWindow):
 
         # Setup main window
         self.setWindowTitle("IDAES Flowsheet Editor")
-        self.centralWidget = qtw.QWidget(self)
         self.resize(1024,768)
-        
+
+        # Create central widget
+        self.mainarea = qtw.QWidget()
+        self.setCentralWidget(self.mainarea)
+        self.mainarea.setLayout(qtw.QHBoxLayout)
+
+        # Create main menu
+        self.create_main_menu()
 
         # Show the main window
         self.show()
 
 
-        
+    # Method to create main menu
+    def create_main_menu(self):
+
+        mainmenu = self.menuBar()
+
+        # Add FILE menu
+        file_menu = mainmenu.addMenu('File')
+
+        # Add EDIT menu
+        edit_menu = mainmenu.addMenu('Edit')
+
+        # Add RUN menu
+        run_menu = mainmenu.addMenu('Run')
+
+        # Add View menu
+        view_menu = mainmenu.addMenu('View')
+
+        # Add Help menu
+        help_menu = mainmenu.addMenu('Help')
+
 
 
 
