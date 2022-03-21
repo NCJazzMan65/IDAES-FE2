@@ -44,14 +44,66 @@ class MainWindow(qtw.QMainWindow):
         # Create central widget
         self.mainarea = qtw.QWidget()
         self.setCentralWidget(self.mainarea)
-        self.mainarea.setLayout(qtw.QHBoxLayout)
 
         # Create main menu
         self.create_main_menu()
 
+        # Create main layout
+        self.main_grid = qtw.QGridLayout()
+        self.mainarea.setLayout(self.main_grid)
+        self.create_main_areas()
+
+        # Create the status bar
+        self.status_bar = qtw.QStatusBar()
+        self.setStatusBar(self.status_bar)
+        self.status_bar.showMessage("Flowsheet Editor Ready")
+
         # Show the main window
         self.show()
 
+
+    # Method to create main display areas
+    def create_main_areas(self):
+
+        # Create flowsheet tab
+        self.flowsheet_tab = qtw.QTabWidget()
+        flowsheet = qtw.QWidget()
+        self.flowsheet_tab.addTab(flowsheet, 'Flowsheet 1')
+        self.main_grid.addWidget(self.flowsheet_tab, 0, 0)
+
+        # Create properties area
+        self.prop_area = qtw.QWidget()
+        self.main_grid.addWidget(self.prop_area, 0, 1)
+
+        # Create unit model tabs
+        self.unit_model_tab = qtw.QTabWidget(tabPosition = qtw.QTabWidget.South)
+
+        terminators = qtw.QWidget()
+        terminator_layout = qtw.QHBoxLayout()
+        terminators.setLayout(terminator_layout)
+        feed_block = qtw.QLabel(self)
+        feed_block_pix = qtg.QPixmap('idaes_graphics/Feed_Block_Icon.png')
+        feed_block.setPixmap(feed_block_pix)
+        terminator_layout.addWidget(feed_block)
+        prod_block = qtw.QLabel(self)
+        prod_block_pix = qtg.QPixmap('idaes_graphics/Product_Block_Icon.png')
+        prod_block.setPixmap(prod_block_pix)
+        terminator_layout.addWidget(prod_block)
+        terminator_blank = qtw.QWidget()
+        terminator_layout.addWidget(terminator_blank)
+
+        reactors = qtw.QWidget()
+        reactor_layout = qtw.QHBoxLayout()
+        reactors.setLayout(reactor_layout)
+        equil_reactor = qtw.QLabel(self)
+        pixmap = qtg.QPixmap('idaes_graphics/Equil_Reactor_Icon.png')
+        equil_reactor.setPixmap(pixmap)
+        reactor_layout.addWidget(equil_reactor)
+
+        self.unit_model_tab.addTab(terminators, 'Terminators')
+        self.unit_model_tab.addTab(reactors, 'Reactors')
+        self.main_grid.addWidget(self.unit_model_tab, 1, 0, 2, 2)
+        
 
     # Method to create main menu
     def create_main_menu(self):
@@ -72,8 +124,6 @@ class MainWindow(qtw.QMainWindow):
 
         # Add Help menu
         help_menu = mainmenu.addMenu('Help')
-
-
 
 
 # Define main method
