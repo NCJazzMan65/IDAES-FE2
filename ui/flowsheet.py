@@ -17,4 +17,25 @@
 
 """IDAES Flosheet Class"""
 
-# Import 
+import sys
+import os
+
+# PyQT imports
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtGui as qtg
+from PyQt5 import QtWidgets as qtw
+
+# Add parent directory to the system path
+sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
+
+
+class Flowsheet(qtw.QWidget):
+
+    # Initialize the class
+    def __init__(self):
+
+        # Call initialization on parent object
+        super().__init__()
+
+        # Allow drag-drop operations
+        self.setAcceptDrops(True)
