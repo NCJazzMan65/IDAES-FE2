@@ -15,7 +15,7 @@
 #                                            #
 ##############################################  
 
-"""IDAES Flosheet Class"""
+"""IDAES Flowsheet Class"""
 
 import sys
 import os
@@ -39,3 +39,6 @@ class Flowsheet(qtw.QWidget):
 
         # Allow drag-drop operations
         self.setAcceptDrops(True)
+
+        # Add a blank image as the canvas for drawing
+        self.canvas = qtg.QImage()
